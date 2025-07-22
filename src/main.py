@@ -2,8 +2,8 @@ from LegoImage import LegoImage
 import time
 
 def main():
-    image_path = "./resources/sources/squirrel.jpg"
-    save_path = "./resources/results/squirrel_32.png"
+    image_path = "./resources/sources/ironman.jpg"
+    save_path = "./resources/results/ironman_result_64_64.png"
     try:
 
         img = LegoImage(image_path)
@@ -15,7 +15,7 @@ def main():
 
         img = LegoImage("./resources/intermediate_result.png")
         img.open()
-        img.downsample()
+        img.downsample(9)
         img.save("./resources/intermediate_result2.png")
         img.get_pixels()
         img.convert_to_legocolors("./resources/colors.txt")
