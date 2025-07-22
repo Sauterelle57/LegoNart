@@ -62,7 +62,7 @@ class LegoColorList:
                     color = tuple(map(int, color.split(' ')))
                     legocolors.append(LegoColor(color, name))
         except FileNotFoundError:
-            print(f"File '{path}' not found.")
+            print(f"\033[91mFile '{path}' not found.\033[0m")
         self.colors = legocolors
         return self.colors
 

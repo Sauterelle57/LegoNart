@@ -31,23 +31,21 @@ class LegoImage:
         if self.img is not None:
             self.img.show()
         else:
-            print("Image not opened yet.")
+            print("\033[91mImage not opened yet.\033[0m")
 
-    def downsample(self, factor: int = 0):
-        """Downsample the image by the given factor."""
-        if factor == 0:
-            factor = min(self.img.size[0], self.img.size[1]) // 32
-        if self.img is not None and factor > 0:
-            new_size = (self.img.size[0] // factor, self.img.size[1] // factor)
+    def downsample(self, size_x: int, size_y: int):
+        """Downsample the image to the given size."""
+        if self.img is not None:
+            new_size = (size_x, size_y)
             self.img = self.img.resize(new_size, Image.Resampling.LANCZOS)
         else:
-            print("Invalid downsampling factor or image not opened.")
+            print("\033[91mInvalid downsampling factor or image not opened.\033[0m")
 
     def convert_to_legocolors(self, color_path: str) -> list:
         """Convert the pixel values to LegoColor objects."""
         colors = LegoColorList().import_colors(color_path)
         if not colors:
-            print("No colors imported. Please check the color file path.")
+            print("\033[91mNo colors imported. Please check the color file path.\033[0m")
             return []
         conversion_map = {}
         for pixel in self.pixels:
@@ -66,18 +64,15 @@ class LegoImage:
             self.result.putdata([color.get_value() for color in self.legocolors])
             return self.result
         else:
-            print("No Lego colors to generate the result image.")
+            print("\033[91mNo Lego colors to generate the result image.\033[0m")
             return None
 
     def save(self, path: str):
         """Save the generated image to the specified path."""
         if self.result is not None:
             self.result.save(path)
-            print(f"Image saved to '{path}'.")
         elif self.pixels is not None:
             self.pixels = self.pixels
-            print(f"Image saved to '{path}'.")
         else:
             self.img.save(path)
-            print(f"Image saved to '{path}'.")
             return
