@@ -1,5 +1,5 @@
 # Custom gitignore for Python projects
-*/draft
+draft
 intermediate_result.png
 intermediate_result2.png
 
