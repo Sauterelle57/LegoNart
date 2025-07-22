@@ -1,8 +1,11 @@
 from LegoImage import LegoImage
+import time
 
 def main():
-    image_path = "./resources/baboon.jpg"
+    image_path = "./resources/sources/squirrel.jpg"
+    save_path = "./resources/results/squirrel_32.png"
     try:
+
         img = LegoImage(image_path)
         img.open()
         img.get_pixels()
@@ -13,13 +16,18 @@ def main():
         img = LegoImage("./resources/intermediate_result.png")
         img.open()
         img.downsample()
+        img.save("./resources/intermediate_result2.png")
         img.get_pixels()
         img.convert_to_legocolors("./resources/colors.txt")
         img.generate_result()
-        img.save("./resources/baboon_result_32_32.png")
+        img.save(save_path)
 
     except FileNotFoundError:
         print(f"Image file '{image_path}' not found.")
 
+
 if __name__ == "__main__":
+    start_time = time.time()
     main()
+    end_time = time.time()
+    print(f"Processing completed in {end_time - start_time:.2f} seconds.")

@@ -6,6 +6,7 @@ class LegoImage:
         self.path = path
         self.img = None
         self.pixels = None
+        self.pieces = []
         self.legocolors = []
         self.result = None
 
@@ -48,16 +49,21 @@ class LegoImage:
         if not colors:
             print("No colors imported. Please check the color file path.")
             return []
+        conversion_map = {}
         for pixel in self.pixels:
+            if (pixel in conversion_map):
+                self.legocolors.append(conversion_map[pixel])
+                continue
             closest_color = min(colors, key=lambda c: pixel.difference(LegoColor(c)))
             self.legocolors.append(closest_color)
+            conversion_map[pixel] = closest_color
         return self.legocolors
 
     def generate_result(self):
         """Generate a new image from the LegoColor objects."""
         if self.legocolors is not None:
             self.result = Image.new("RGB", self.get_image_size())
-            self.result.putdata([color for color in self.legocolors])
+            self.result.putdata([color.get_value() for color in self.legocolors])
             return self.result
         else:
             print("No Lego colors to generate the result image.")

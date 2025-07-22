@@ -5,7 +5,7 @@ A Python project for creative Lego-inspired art generation.
 ## Features
 
 - Convert your jpg pictures into Lego art work
-- Customizable color palettes
+- Customizable color palettes (see [Lego colors](https://super-briques.fr/fr/15898-tuile-ronde-1x1-piece-lego-98138-19415.html#/2433-couleur-rouge_red))
 - Customizable size / scale
 
 ## Installation
